@@ -6,7 +6,7 @@ import Previsions from './components/Previsions';
 export default function App() {
   return (
     <View style={styles.container} >
-      {/* <Home/> */}
+      <Home/>
       <Previsions/>
     </View>
   );
@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
       // justifyContent: 'center',
       // alignItems: 'center',
       backgroundColor: '#682FCD',
-      padding: '2rem',
+      padding: '1.5rem',
   },
 });
-
