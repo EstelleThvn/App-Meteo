@@ -1,6 +1,5 @@
 import React,{useEffect, useState} from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import cloudandsun from '../assets/cloudandsun.png';
 
 export default function Home(props) {
 
@@ -50,24 +49,28 @@ export default function Home(props) {
 //         });
 // },[]);
 
-
-
     const [temp, setTemp] = useState('');
     const [description, setDescription] = useState('');
     const [ville, setVille] = useState('');
+    const [icon, setIcon] = useState('');
+
+
     fetch(
             `https://api.openweathermap.org/data/2.5/weather?lat=48.8534&lon=2.3488&units=metric&lang=fr&appid=fcaa070d1babb38b0d7838801ad55e67`
         )
-        
+
             .then((response) => response.json())
             .then(data => {console.log(data); 
                 setTemp(data.main.temp);
                 setDescription(data.weather[0].description);
                 setVille(data.name);
+                setIcon(data.weather[0].icon);
             });
-
+            
 
     return (
+        
+
         <View style={{display:'flex', flex:1}}>
             <View style={{flex:1}}>
             <View style={{alignSelf:'flex-start'}}>
@@ -78,11 +81,11 @@ export default function Home(props) {
                 </View>
             </View>
             <View style={{flex:1, justifyContent:'center', alignItems:'center',}}>
-          <Image style={styles.temps} source={cloudandsun} />
+            {icon !== '' && <Image style={styles.temps} source={require(`../assets/${icon}.png`)}/>}
           </View>
           <View>
           <Text style={styles.temperature}>{temp}°</Text>
-    <Text style={styles.description}>{description}</Text>
+        <Text style={styles.description}>{description}</Text>
           </View>
           </View>
         </View>
@@ -92,8 +95,8 @@ export default function Home(props) {
 
    const styles = StyleSheet.create({
     temps: {
-        width:220,
-        height:180,
+        width:200,
+        height:200,
     },
     lieu: {
         fontWeight: 'bold',
